@@ -30,6 +30,7 @@
 import React from 'react'
 import { Card } from 'semantic-ui-react'
 import ItemCard from './ItemCard';
+import { withRouter } from 'react-router-dom';
 
 const src = '/images/wireframe/image.png'
 
@@ -48,4 +49,4 @@ const ItemsContainer = (props) => {
 )
 }
 
-export default ItemsContainer
+export default withRouter(ItemsContainer)

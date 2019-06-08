@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import ReactDOM from 'react-dom';
+import { Switch, Route, withRouter } from 'react-router-dom'
 import ItemsContainer from './components/ItemsContainer';
 import NavBar from './components/NavBar'
 
@@ -48,10 +49,10 @@ class App extends React.Component {
     return (
       <div className="App">
         <NavBar items={this.state.items} showAllergenItems={this.showAllergenItems}/>
-        <ItemsContainer items={this.state.items} allergenItems={this.state.allergenItems}/>
+        <Route path="/" render={()=> <ItemsContainer items={this.state.items} allergenItems={this.state.allergenItems}/>}/>
       </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);
