@@ -1,5 +1,8 @@
 import React from 'react'
 import { Card, Icon, Image } from 'semantic-ui-react'
+import { Button, Header, Modal } from 'semantic-ui-react'
+import CardModal from './CardModal'
+
 
 const ItemCard = (props) => (
   <Card>
@@ -7,7 +10,11 @@ const ItemCard = (props) => (
     <Card.Content>
       <Card.Header>{props.item.name}</Card.Header>
       <Card.Meta>
-        <span className='date'>{props.item.section}</span>
+        <span className='date'>
+          {props.item.oneliner ? props.item.oneliner : props.item.section}</span>
+        <div>
+        <CardModal item={props.item} />
+        </div>
       </Card.Meta>
     </Card.Content>
   </Card>

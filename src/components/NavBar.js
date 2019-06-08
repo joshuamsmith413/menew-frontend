@@ -6,7 +6,7 @@ class NavBar extends React.Component {
 
   render(){
     return(
-      <div>
+      <div style={{backgroundColor: "yellow"}}>
         <h1>This is my NavBar</h1>
         <AllergenDropDown items={this.props.items} showAllergenItems={this.props.showAllergenItems}/>
       </div>
