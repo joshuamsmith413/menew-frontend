@@ -24,6 +24,11 @@ class App extends React.Component {
     let allergenToMatch = e.target.value
     let itemsWithAllergen = []
     console.log(allergenToMatch)
+    if (allergenToMatch === "None") {
+      this.setState({
+        allergenItems: []
+      })
+    }
     this.state.items.forEach(item => {
       item.allergens.forEach(allergen => {
         if (allergen.name === allergenToMatch) {

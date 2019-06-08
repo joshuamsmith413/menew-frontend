@@ -36,11 +36,11 @@ function AllergenDropDown(props) {
 }
 
   const findUniqueAllergens = () => {
-    let foo = []
+    let fullAllergenList = []
     props.items.forEach(item => {
-     return item.allergens.forEach(allergen => foo.push(allergen.name))
+     return item.allergens.forEach(allergen => fullAllergenList.push(allergen.name))
    })
-    return foo.filter(onlyUnique)
+    return fullAllergenList.filter(onlyUnique)
   }
 
   const makeMenuItem = () => {
