@@ -34,19 +34,22 @@ import { withRouter } from 'react-router-dom';
 
 const src = '/images/wireframe/image.png'
 
-const ItemsContainer = (props) => {
-  const renderAllItems = () => {
-    return props.items.map(item => <ItemCard item={item} />)
+class ItemsContainer extends React.Component {
+  renderAllItems = () => {
+    return this.props.items.map(item => <ItemCard key={item.id} item={item} />)
   }
 
-  const renderAllergenItems = () => {
-    return props.allergenItems.map(item => <ItemCard item={item} />)
+  renderAllergenItems = () => {
+    return this.props.allergenItems.map(item => <ItemCard key={item.id} item={item} />)
   }
+
+  render() {
   return (
-  <Card.Group itemsPerRow={3}>
-    {props.allergenItems.length > 0 ? renderAllergenItems() : renderAllItems()}
-  </Card.Group>
-)
+    <Card.Group itemsPerRow={3}>
+      {this.renderAllItems()}
+    </Card.Group>
+    )
+  }
 }
 
 export default withRouter(ItemsContainer)

@@ -19,7 +19,6 @@ const useStyles = makeStyles(theme => ({
 
 function AllergenDropDown(props) {
   const classes = useStyles();
-  const [age, setAge] = React.useState('');
   const [open, setOpen] = React.useState(false);
 
 
@@ -43,18 +42,12 @@ function AllergenDropDown(props) {
     return fullAllergenList.filter(onlyUnique)
   }
 
-  const makeMenuItem = () => {
-    findUniqueAllergens().map(allergen => {
-      return <MenuItem value={allergen}>{allergen}</MenuItem>
-    })
-  }
-
   return (
     <form autoComplete="off">
       <Button className={classes.button} onClick={handleOpen}>
       </Button>
       <FormControl className={classes.formControl}>
-        <InputLabel htmlFor="demo-controlled-open-select">Allergens</InputLabel>
+        <InputLabel htmlFor="demo-controlled-open-select"></InputLabel>
         <Select
           open={open}
           onClose={handleClose}
@@ -67,7 +60,7 @@ function AllergenDropDown(props) {
           }}
         >
           <MenuItem value="">
-            <em>None</em>
+            <em>Allergens</em>
           </MenuItem>
           {findUniqueAllergens().map(allergen => {
               return <MenuItem value={allergen}>{allergen}</MenuItem>

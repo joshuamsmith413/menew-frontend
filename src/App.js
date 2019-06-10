@@ -8,7 +8,9 @@ import NavBar from './components/NavBar'
 class App extends React.Component {
   state = {
     items: [],
-    allergenItems: []
+    allergenItems: [],
+    restaurant: "",
+    menu: "lunch"
   }
 
   componentDidMount() {
@@ -19,13 +21,21 @@ class App extends React.Component {
          items: data
        })
      })
+
+  }
+
+  itemsOnMenu = () => {
+    if (this.state.allergenItems.length > 0) {
+    return this.state.allergenItems.filter(item => item.restaurants[0].name === this.state.restaurant)
+  } else {
+      return this.state.items.filter(item => item.restaurants[0].name === this.state.restaurant)
+    }
   }
 
   showAllergenItems = (e) => {
     let allergenToMatch = e.target.value
     let itemsWithAllergen = []
-    console.log(allergenToMatch)
-    if (allergenToMatch === "None") {
+    if (allergenToMatch === "Allergens") {
       this.setState({
         allergenItems: []
       })
@@ -37,19 +47,22 @@ class App extends React.Component {
         }
       })
     })
-    console.log(itemsWithAllergen)
     this.setState({
       allergenItems: itemsWithAllergen
     })
   }
 
+  selectRestaurant = (e) => {
+    this.setState({
+      restaurant: e.target.innerText
+    })
+  }
 
   render() {
-
     return (
       <div className="App">
-        <NavBar items={this.state.items} showAllergenItems={this.showAllergenItems}/>
-        <Route path="/" render={()=> <ItemsContainer items={this.state.items} allergenItems={this.state.allergenItems}/>}/>
+        <NavBar items={this.state.items} showAllergenItems={this.showAllergenItems} selectRestaurant={this.selectRestaurant}/>
+        <Route path="/" render={()=> <ItemsContainer items={this.itemsOnMenu()} allergenItems={this.state.allergenItems} />}/>
       </div>
     );
   }
