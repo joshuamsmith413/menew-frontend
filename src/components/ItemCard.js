@@ -1,6 +1,6 @@
 import React from 'react'
-import { Card, Icon, Image } from 'semantic-ui-react'
-import { Button, Header, Modal } from 'semantic-ui-react'
+import { Card, Image } from 'semantic-ui-react'
+import { Header, Modal } from 'semantic-ui-react'
 import CardModal from './CardModal'
 import { withRouter } from 'react-router-dom';
 

@@ -4,10 +4,15 @@ import ReactDOM from 'react-dom';
 import { Switch, Route, withRouter } from 'react-router-dom'
 import ItemsContainer from './components/ItemsContainer';
 import NavBar from './components/NavBar'
+import AllergenCheckboxes from './components/AllergenCheckboxes.js'
+import _ from 'lodash'
+import HomePage from './components/HomePage'
+import NewItem from './components/NewItem'
 
 class App extends React.Component {
   state = {
     items: [],
+    checkedAllergens: [],
     allergenItems: [],
     restaurant: "",
     menu: "lunch"
@@ -32,23 +37,23 @@ class App extends React.Component {
     }
   }
 
-  showAllergenItems = (e) => {
-    let allergenToMatch = e.target.value
-    let itemsWithAllergen = []
-    if (allergenToMatch === "Allergens") {
-      this.setState({
-        allergenItems: []
-      })
+  showAllergenItems = () => {
+
+  }
+
+
+  handleAllergenCheckboxes = (e) => {
+    let newCheckedAllergen = e.target.innerText
+    if (this.state.checkedAllergens.includes(newCheckedAllergen)) {
+       let newState = this.state.checkedAllergens.filter(item => {
+         return item !== newCheckedAllergen
+       })
+       this.setState(prevState => {
+         return {checkedAllergens: newState}
+       })
     }
-    this.state.items.forEach(item => {
-      item.allergens.forEach(allergen => {
-        if (allergen.name === allergenToMatch) {
-          itemsWithAllergen.push(item)
-        }
-      })
-    })
-    this.setState({
-      allergenItems: itemsWithAllergen
+    this.setState(prevState => {
+      return {checkedAllergens: [...prevState.checkedAllergens, newCheckedAllergen]}
     })
   }
 
@@ -61,8 +66,11 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <NavBar items={this.state.items} showAllergenItems={this.showAllergenItems} selectRestaurant={this.selectRestaurant}/>
-        <Route path="/" render={()=> <ItemsContainer items={this.itemsOnMenu()} allergenItems={this.state.allergenItems} />}/>
+        <NavBar items={this.state.items} selectRestaurant={this.selectRestaurant}/>
+        <Route exact path="/" render={ () => <HomePage />}/>
+        {this.state.restaurant === "" ? null : <AllergenCheckboxes itemsOnMenu={this.itemsOnMenu()} handleAllergenCheckboxes={this.handleAllergenCheckboxes}/>}
+        <Route path="/" render={()=> <ItemsContainer itemsOnMenu={this.itemsOnMenu()} allergenItems={this.state.allergenItems} />}/>
+        <Route path="/newitem" component={NewItem}/>
       </div>
     );
   }
