@@ -10,17 +10,6 @@ export default function RestaurantDropdown(props) {
     return self.indexOf(value) === index;
   }
 
-  const findUniqueRestaurants = () => {
-    let fullRestaurantList = []
-    props.items.forEach(item => {
-      return item.restaurants.forEach(restaurant => {
-        fullRestaurantList.push(restaurant.name)
-      })
-    })
-    return fullRestaurantList.filter(onlyUnique)
-  }
-
-
   function handleClick(event) {
     setAnchorEl(event.currentTarget);
   }
@@ -45,8 +34,8 @@ export default function RestaurantDropdown(props) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        {findUniqueRestaurants().map(restaurant => {
-          return <MenuItem onClick={props.selectRestaurant} key={restaurant}>{restaurant}</MenuItem>
+        {props.restaurants.map(restaurant => {
+          return <MenuItem id={restaurant.id} onClick={() => props.selectRestaurant(restaurant)} key={restaurant.id}>{restaurant.name}</MenuItem>
         })}
       </Menu>
     </div>

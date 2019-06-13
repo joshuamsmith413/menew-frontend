@@ -6,21 +6,87 @@ import { Button, Checkbox, Form } from 'semantic-ui-react'
 
 class NewItem extends React.Component {
 
+  state = {
+    fields: {
+      name: "",
+      oneliner: "",
+      description: "",
+      section: "",
+      picture: "",
+      restaurant: ""
+    }
+  }
 
+  handleChange = e => {
+    console.log(e.target.value)
+    let newFields = {...this.state.fields, [e.target.name]: e.target.value}
+    this.setState({fields: newFields})
+  }
+
+  handleSubmit = e => {
+    e.preventDefault()
+    e.target.reset()
+    fetch('http://localhost:3000/items', {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      },
+      body: JSON.stringify(this.state.fields)
+    })
+    .then(r => r.json())
+    .then(data => {
+      console.log(data)
+    })
+  }
+
+
+  //add a menu filter on line 64
   render() {
+
     return (
       <div>
-        <Form>
-          <Form.Field>
+        <h1>Create a New Item</h1>
+        <Form onSubmit={this.handleSubmit}>
             <label>Name of Dish</label>
-            <input placeholder='First Name' />
-          </Form.Field>
-          <Form.Field>
+            <input
+              name='name'
+              placeholder='Name'
+              onChange={this.handleChange}
+            />
+            <label>Select a Restaurant</label>
+            <select onChange={this.handleChange}>
+              {this.props.restaurants.map(restaurant => {
+                return <option name={restaurant.name} value={restaurant.id}>{restaurant.name}</option>
+              })}
+            </select>
+            <label>Select a Menu</label>
+
             <label>One Liner or Drop Line</label>
-            <input placeholder='Last Name' />
-          </Form.Field>
-             <Form.TextArea label='Description' placeholder='Full Description Here' />
-          <Button type='submit'>Submit</Button>
+            <input
+              name='oneliner'
+              placeholder='Drop line'
+              onChange={this.handleChange}
+            />
+            <Form.TextArea
+              name='description'
+              label='Description'
+              placeholder='Full Description Here'
+              onChange={this.handleChange}
+              />
+            <label>Section</label>
+            <input
+              name='section'
+              placeholder='App, Main, Crudi, etc...'
+              onChange={this.handleChange}
+            />
+            <label>Picture</label>
+            <input
+              name='picture'
+              placeholder='Enter Url'
+              onChange={this.handleChange}
+            />
+          <Button type='Submit'>Submit</Button>
         </Form>
       </div>
     )}
