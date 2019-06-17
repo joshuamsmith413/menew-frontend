@@ -4,10 +4,26 @@ import ItemCard from './ItemCard';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 import AllergenCheckboxes from './AllergenCheckboxes'
-import RestaurantMenus from './RestaurantMenus'
+
 
 
 class ItemsContainer extends React.Component {
+
+  findItemsWithAllergen = () => {
+    let itemsWithAllergen = []
+    this.props.restaurant.items.forEach(item => {
+      let counter = 0
+      return item.allergens.forEach(allergen => {
+        if (this.props.checkedAllergens.includes(allergen)) {
+          return counter += 1
+        }
+      })
+      if (counter === this.props.checkedAllergens.length) {
+        itemsWithAllergen.push(item)
+      }
+    })
+    return itemsWithAllergen
+  }
 
   getLunch = () => {
     let lunch = []
@@ -18,29 +34,24 @@ class ItemsContainer extends React.Component {
         }
       })
     })
-    return lunch
+    let uniq = new Set(lunch.map(e => JSON.stringify(e)));
+    let res = Array.from(uniq).map(e => JSON.parse(e));
+    return res
   }
 
   getDinner = () => {
-    let dinnerToRender = []
     let dinner = []
     this.props.restaurant.items.forEach(item => {
       return item.menus.forEach(menu => {
+        console.log(item)
         if (menu.meal_period.includes("dinner")) {
           return dinner.push(item)
         }
       })
     })
-    dinner.forEach(item1 => {
-      dinner.forEach(item2 => {
-        if(item1.name == item2.name) {
-            return null
-        } else {
-          dinnerToRender.push(item1)
-        }
-      })
-    })
-    return dinner
+    let uniq = new Set(dinner.map(e => JSON.stringify(e)));
+    let res = Array.from(uniq).map(e => JSON.parse(e));
+    return res
   }
 
   renderLunch = () => {
@@ -51,18 +62,14 @@ class ItemsContainer extends React.Component {
     return this.getDinner().map(item => <ItemCard key={item.id} item={item} />)
   }
 
-
-
   render() {
-    console.log(this.props.restaurant)
+
 
   return (
-    <div>
+    <div className="ItemsContainer">
       <h1>{this.props.restaurant.name}</h1>
-      <h3>{this.props.restaurant.name} Menus</h3>
-      <RestaurantMenus menus={this.props.menus}/>
       <AllergenCheckboxes items={this.props.restaurant.items} handleAllergenCheckboxes={this.props.handleAllergenCheckboxes} allergens={this.props.allergens} />
-      <h3>Lunch</h3>
+      {this.renderLunch().length > 0 ? <h3>Lunch</h3> : null}
     <Card.Group itemsPerRow={3}>
       {this.renderLunch()}
     </Card.Group>

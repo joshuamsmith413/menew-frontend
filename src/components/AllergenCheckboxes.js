@@ -17,7 +17,7 @@ export default class AllergenCheckboxes extends React.Component {
 
   makeAllergenCheckboxes = () => {
     return this.findUniqueAllergens().map(allergen => {
-      return <Checkbox key={allergen} value={allergen} label={allergen} onChange={this.props.handleAllergenCheckboxes} />
+      return <Checkbox key={allergen} value={allergen} label={allergen} onChange={() => {this.props.handleAllergenCheckboxes(allergen)}} />
     })
   }
 

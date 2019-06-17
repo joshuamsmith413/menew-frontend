@@ -44,20 +44,23 @@ class App extends React.Component {
    })
   }
 
-
-
-  handleAllergenCheckboxes = (e) => {
-    let allergenString = e.target.innerText
-
-    let allergenToAdd = this.state.allergens.filter(allergen => allergen.name === allergenString)
-    this.setState(prevState => {
-      return {checkedAllergens: [...prevState.checkedAllergens, allergenToAdd]
+  handleAllergenCheckboxes = (allergen) => {
+    let arrayOfAllergens = this.state.checkedAllergens
+    if (this.state.checkedAllergens.includes(allergen)) {
+      let indexToRemove = arrayOfAllergens.indexOf(allergen)
+      let newArrayForState = arrayOfAllergens.splice(indexToRemove, ++indexToRemove)
+      this.setState({
+        checkedAllergens: arrayOfAllergens
+      })
+    } else {
+      this.setState(prevState => {
+        return {checkedAllergens: [...prevState.checkedAllergens, allergen]}
+      })
     }
-    })
   }
 
-  savedRestaurant = (routerProps) => {
-    let saveRestaurant = this.state.restaurants.filter(restaurant => restaurant.name === routerProps.params.match.params.name))
+  fetchRestaurant = (routerProps) => {
+    let saveRestaurant = this.state.restaurants.filter(restaurant => restaurant.name === routerProps.match.params.name)
     this.setState({
       selectedRestaurant: saveRestaurant
     })
@@ -115,12 +118,13 @@ class App extends React.Component {
                 // realllly you would render a loading spinner
 
                 if (!this.state.selectedRestaurant) {
-                  return this.savedRestaurant()
+                return null
 
                 }
                 return <ItemsContainer
                   restaurant={this.state.selectedRestaurant} handleAllergenCheckboxes={this.handleAllergenCheckboxes}
                   menus={this.state.menus}
+                  checkedAllergens={this.state.checkedAllergens}
                   />
 
 

@@ -19,7 +19,7 @@ export default function RestaurantDropdown(props) {
   }
 
   return (
-    <div>
+    <span className="RestaurantDropdown">
       <Button
         aria-controls="simple-menu"
         aria-haspopup="true"
@@ -32,12 +32,17 @@ export default function RestaurantDropdown(props) {
         anchorEl={anchorEl}
         keepMounted
         open={Boolean(anchorEl)}
-        onClose={handleClose}
+        onClick={handleClose}
       >
         {props.restaurants.map(restaurant => {
-          return <MenuItem id={restaurant.id} onClick={() => props.selectRestaurant(restaurant)} key={restaurant.id}>{restaurant.name}</MenuItem>
+          return <MenuItem
+            id={restaurant.id}
+            onClick={() => props.selectRestaurant(restaurant)}
+            key={restaurant.id}>
+            {restaurant.name}
+          </MenuItem>
         })}
       </Menu>
-    </div>
+    </span>
   );
 }

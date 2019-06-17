@@ -10,7 +10,7 @@ const CardModal = (props) => {
     })
   }
   return (
-  <Modal trigger={<Button>More Info</Button>} key={props.item.id}>
+  <Modal trigger={<Button basic color="blue">More Info</Button>} key={props.item.id}>
     <Modal.Header>{props.item.name} ({props.item.section})</Modal.Header>
     <Modal.Content image>
       <Image wrapped size='medium' src={props.item.picture} />

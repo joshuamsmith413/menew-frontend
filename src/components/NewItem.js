@@ -45,7 +45,7 @@ class NewItem extends React.Component {
   render() {
 
     return (
-      <div>
+      <span>
         <h1>Create a New Item</h1>
         <Form onSubmit={this.handleSubmit}>
             <label>Name of Dish</label>
@@ -88,7 +88,7 @@ class NewItem extends React.Component {
             />
           <Button type='Submit'>Submit</Button>
         </Form>
-      </div>
+      </span>
     )}
 }
 export default withRouter(NewItem)
