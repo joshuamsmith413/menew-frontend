@@ -1,6 +1,8 @@
 import React from 'react'
 import { Button, Header, Image, Modal } from 'semantic-ui-react'
 import ItemCard from './ItemCard.js'
+import DeleteEditButton from './DeleteEditButton.js'
+import { Link } from "react-router-dom";
 
 const CardModal = (props) => {
 
@@ -10,7 +12,7 @@ const CardModal = (props) => {
     })
   }
   return (
-  <Modal trigger={<Button basic color="blue">More Info</Button>} key={props.item.id}>
+  <Modal trigger={<Button basic color="red">More Info</Button>} key={props.item.id}>
     <Modal.Header>{props.item.name} ({props.item.section})</Modal.Header>
     <Modal.Content image>
       <Image wrapped size='medium' src={props.item.picture} />
@@ -21,6 +23,7 @@ const CardModal = (props) => {
         <h4>Allergens:</h4>
         <ul>{renderAllergenList()}</ul>
       </Modal.Description>
+      <DeleteEditButton item={props.item}/>
     </Modal.Content>
   </Modal>
   )

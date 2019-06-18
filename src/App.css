@@ -26,11 +26,13 @@
 #HomePagecontainer1 {
   display: inline-block;
   width: 25%;
-  padding-right: 50px;
+  text-align: center;
+  padding-left: 75px;
 }
 
 #HomePagecontainer2 {
   display: inline-block;
+  text-align: center;
   width: 25%;
   padding-left: 50px;
 }
@@ -38,19 +40,21 @@
 .secondaryContainer {
   display: block;
   text-align: center;
+  width: 100%;
 }
 
 #cardExample {
-  height: 350px;
-  width: 300px;
+  height: auto;
+  width: auto;
   border-radius: 8px;
 }
 
 #menuPageExample {
-  height: 350px;
-  width: 500px;
+  height: auto;
+  width: auto;
   border-radius: 8px;
 }
+
 
 .newItemDiv {
   display: block;

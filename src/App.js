@@ -8,6 +8,7 @@ import AllergenCheckboxes from './components/AllergenCheckboxes.js'
 import _ from 'lodash'
 import HomePage from './components/HomePage'
 import NewItem from './components/NewItem'
+import EditItem from './components/EditItem'
 import { BrowserRouter } from 'react-router-dom';
 
 class App extends React.Component {
@@ -97,6 +98,7 @@ class App extends React.Component {
 
           <Switch>
             <Route exact path="/" component={HomePage}/>
+            <Route exact path='/EditItem/' component={EditItem}/>
             <Route path="/newitem" exact render={() =>
                 <NewItem
                   menus ={this.state.menus}

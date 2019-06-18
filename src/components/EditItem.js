@@ -4,18 +4,23 @@ import { withRouter } from 'react-router-dom';
 import { Button, Checkbox, Form } from 'semantic-ui-react'
 
 
-class NewItem extends React.Component {
+class EditItem extends React.Component {
+
+  item = this.props.location.state.item
 
   state = {
     fields: {
-      name: "",
-      oneliner: "",
-      description: "",
-      section: "",
-      picture: "",
+      id: this.item.id,
+      name: this.item.name,
+      oneliner: this.item.oneliner,
+      description: this.item.description,
+      section: this.item.section,
+      picture: this.item.picture,
       restaurant: ""
     }
   }
+
+
 
   handleChange = e => {
     console.log(e.target.value)
@@ -26,8 +31,8 @@ class NewItem extends React.Component {
   handleSubmit = e => {
     e.preventDefault()
     e.target.reset()
-    fetch('http://localhost:3000/items', {
-      method: "POST",
+    fetch(`http://localhost:3000/items/${this.props.location.state.item.id}`, {
+      method: "PATCH",
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json'
@@ -40,7 +45,6 @@ class NewItem extends React.Component {
 
 
 
-  //add a menu filter on line 64
   render() {
 
     return (
@@ -55,12 +59,6 @@ class NewItem extends React.Component {
               onChange={this.handleChange}
               value={this.state.fields.name}
             />
-            <label>Select a Restaurant</label>
-            <select onChange={this.handleChange}>
-              {this.props.restaurants.map(restaurant => {
-                return <option name={restaurant.name} value={restaurant.id}>{restaurant.name}</option>
-              })}
-            </select>
             <label>Meal Peiod</label><br/>
               <input type="radio" name="Meal Period" value="lunch"/> Lunch <span></span>
               <input type="radio" name="Meal Period" value="dinner"/> Dinner <span></span><br/>
@@ -99,4 +97,4 @@ class NewItem extends React.Component {
       </div>
     )}
 }
-export default withRouter(NewItem)
+export default withRouter(EditItem)
