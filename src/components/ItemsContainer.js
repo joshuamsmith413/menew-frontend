@@ -43,7 +43,6 @@ class ItemsContainer extends React.Component {
     let dinner = []
     this.props.restaurant.items.forEach(item => {
       return item.menus.forEach(menu => {
-        console.log(item)
         if (menu.meal_period.includes("dinner")) {
           return dinner.push(item)
         }
@@ -66,17 +65,21 @@ class ItemsContainer extends React.Component {
 
 
   return (
-    <div className="ItemsContainer">
-      <h1>{this.props.restaurant.name}</h1>
-      <AllergenCheckboxes items={this.props.restaurant.items} handleAllergenCheckboxes={this.props.handleAllergenCheckboxes} allergens={this.props.allergens} />
-      {this.renderLunch().length > 0 ? <h3>Lunch</h3> : null}
-    <Card.Group itemsPerRow={3}>
-      {this.renderLunch()}
-    </Card.Group>
-      <h3>Dinner</h3>
-    <Card.Group itemsPerRow={3}>
-      {this.renderDinner()}
-    </Card.Group>
+    <div style ={ { backgroundImage: "url(https://i.pinimg.com/originals/76/89/c5/7689c5513084cd3ae199cec4f9b84af3.jpg)", minHeight: "100vh", backgroundSize: "cover" } }>
+      <div className="ItemsContainer">
+        <div className="itemsToCenter">
+        <h1>{this.props.restaurant.name}</h1>
+        <AllergenCheckboxes items={this.props.restaurant.items} handleAllergenCheckboxes={this.props.handleAllergenCheckboxes} allergens={this.props.allergens} />
+        {this.renderLunch().length > 0 ? <h3>Lunch</h3> : null}
+        <Card.Group itemsPerRow={4}>
+          {this.renderLunch()}
+        </Card.Group>
+          <h3>Dinner</h3>
+        <Card.Group itemsPerRow={4}>
+          {this.renderDinner()}
+        </Card.Group>
+      </div>
+      </div>
     </div>
     )
   }

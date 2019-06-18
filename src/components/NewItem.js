@@ -41,13 +41,15 @@ class NewItem extends React.Component {
   }
 
 
+
   //add a menu filter on line 64
   render() {
 
     return (
-      <span>
+      <div style ={ { backgroundImage: "url(https://www.azamaraclubcruises.com/sites/default/files/heros/med-food-hero.jpg)", minHeight: "100vh", backgroundSize: "cover" } }>
+        <div className="newItemDiv">
         <h1>Create a New Item</h1>
-        <Form onSubmit={this.handleSubmit}>
+        <Form onSubmit={this.handleSubmit} className="newItemForm">
             <label>Name of Dish</label>
             <input
               name='name'
@@ -60,17 +62,18 @@ class NewItem extends React.Component {
                 return <option name={restaurant.name} value={restaurant.id}>{restaurant.name}</option>
               })}
             </select>
-            <label>Select a Menu</label>
-
+            <label>Meal Peiod</label><br/>
+              <input type="radio" name="Meal Period" value="lunch"/> Lunch <span></span>
+              <input type="radio" name="Meal Period" value="dinner"/> Dinner <span></span><br/>
             <label>One Liner or Drop Line</label>
             <input
               name='oneliner'
               placeholder='Drop line'
               onChange={this.handleChange}
             />
+          <label>Description</label>
             <Form.TextArea
               name='description'
-              label='Description'
               placeholder='Full Description Here'
               onChange={this.handleChange}
               />
@@ -86,9 +89,11 @@ class NewItem extends React.Component {
               placeholder='Enter Url'
               onChange={this.handleChange}
             />
+          <br/>
           <Button type='Submit'>Submit</Button>
         </Form>
-      </span>
+        </div>
+      </div>
     )}
 }
 export default withRouter(NewItem)

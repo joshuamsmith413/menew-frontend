@@ -11,6 +11,62 @@
 
 }
 
+.itemsToCenter {
+  display: inline-block;
+  padding-left: 100px;
+  padding-right: 100px;
+}
+
 .ItemsContainer {
   text-align: center;
+  padding: 0px, 40px;
+  color: white;
+}
+
+#HomePagecontainer1 {
+  display: inline-block;
+  width: 25%;
+  padding-right: 50px;
+}
+
+#HomePagecontainer2 {
+  display: inline-block;
+  width: 25%;
+  padding-left: 50px;
+}
+
+.secondaryContainer {
+  display: block;
+  text-align: center;
+}
+
+#cardExample {
+  height: 350px;
+  width: 300px;
+  border-radius: 8px;
+}
+
+#menuPageExample {
+  height: 350px;
+  width: 500px;
+  border-radius: 8px;
+}
+
+.newItemDiv {
+  display: block;
+  text-align: center;
+}
+
+.newItemForm {
+  color: white;
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left
+}
+
+#homeTitle {
+  text-align: right;
+  color: white;
+  padding-right: 40px;
 }
