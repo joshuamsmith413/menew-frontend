@@ -1,25 +1,22 @@
 import React from 'react'
 import { Card, Image } from 'semantic-ui-react'
-import { Header, Modal } from 'semantic-ui-react'
+import { Modal } from 'semantic-ui-react'
 import CardModal from './CardModal'
 import { withRouter } from 'react-router-dom';
 
 
 class ItemCard extends React.Component {
-
-
-
   render() {
     return(
       <Card key={this.props.item.id}>
-        <Image src={this.props.item.picture} width="250" height="250" gravity="faces" crop="fill" wrapped ui={false} />
+        <Image src={this.props.item.picture} width="100px" height="100px" gravity="faces" crop="fill" wrapped ui={false} />
         <Card.Content>
           <Card.Header>{this.props.item.name}</Card.Header>
           <Card.Meta>
-            <span className='date'>
+            <span>
               {this.props.item.oneliner ? this.props.item.oneliner : this.props.item.section}</span>
             <div>
-            <CardModal item={this.props.item} />
+            <CardModal item={this.props.item} handleDelete={this.props.handleDelete}/>
             </div>
           </Card.Meta>
         </Card.Content>

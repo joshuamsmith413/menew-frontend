@@ -2,14 +2,17 @@
   /* text-align: center; */
 }
 
+/* -----------NAVBAR-------------- */
+
 .navbar {
   background-color: "#F79F1B";
 }
 
 .nav-title {
   text-align: center;
-
 }
+
+/* --------items Container----------- */
 
 .itemsToCenter {
   display: inline-block;
@@ -23,23 +26,37 @@
   color: white;
 }
 
-#HomePagecontainer1 {
-  display: inline-block;
-  width: 25%;
-  text-align: center;
-  padding-left: 75px;
-}
+/* --------home page--------------- */
 
-#HomePagecontainer2 {
-  display: inline-block;
-  text-align: center;
-  width: 25%;
-  padding-left: 50px;
+#homeTitle {
+  text-align: right;
+  color: white;
+  padding-right: 40px;
 }
 
 .secondaryContainer {
   display: block;
   text-align: center;
+  width: 50%;
+}
+
+#HomePagecontainer1 {
+  display: inline-block;
+  width: auto;
+  text-align: center;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+#HomePagecontainer2 {
+  display: inline-block;
+  text-align: center;
+  width: auto;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.HomePageText {
   width: 100%;
 }
 
@@ -55,8 +72,11 @@
   border-radius: 8px;
 }
 
+/*------------ new item form -------------*/
 
 .newItemDiv {
+  padding-top: 50px;
+  color: white;
   display: block;
   text-align: center;
 }
@@ -67,10 +87,4 @@
   margin-left: auto;
   margin-right: auto;
   text-align: left
-}
-
-#homeTitle {
-  text-align: right;
-  color: white;
-  padding-right: 40px;
 }

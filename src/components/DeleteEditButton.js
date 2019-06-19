@@ -2,6 +2,7 @@ import React from 'react'
 import { Button, Grid, Popup } from 'semantic-ui-react'
 import { Link } from "react-router-dom";
 
+
 const DeleteEditButton = (props) => {
 
   return (
@@ -16,15 +17,16 @@ const DeleteEditButton = (props) => {
           size='tiny'
           inverted
         />
-      </Link>
+    </Link>
       </Grid.Column>
       <Grid.Column>
         <Popup
-          trigger={<Button color='red' content='Delete' fluid />}
+          trigger={<Button color='red' onClick={() => props.handleDelete(props.item.id)} content='Delete' fluid />}
           content='Delete this item.'
           position='top center'
           size='tiny'
           inverted
+
         />
       </Grid.Column>
     </Grid>

@@ -1,7 +1,7 @@
 import React from 'react'
-import { Link } from "react-router-dom";
+
 import { withRouter } from 'react-router-dom';
-import { Button, Checkbox, Form } from 'semantic-ui-react'
+import { Button, Form } from 'semantic-ui-react'
 
 
 class NewItem extends React.Component {
@@ -18,7 +18,6 @@ class NewItem extends React.Component {
   }
 
   handleChange = e => {
-    console.log(e.target.value)
     let newFields = {...this.state.fields, [e.target.name]: e.target.value}
     this.setState({fields: newFields})
   }
@@ -35,12 +34,9 @@ class NewItem extends React.Component {
       body: JSON.stringify(this.state.fields)
     })
     .then(r => r.json())
-    .then(this.props.history.push("/"))
+    .then(() => this.props.history.push("/"))
   }
 
-
-
-  //add a menu filter on line 64
   render() {
 
     return (

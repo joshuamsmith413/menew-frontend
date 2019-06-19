@@ -54,11 +54,11 @@ class ItemsContainer extends React.Component {
   }
 
   renderLunch = () => {
-    return this.getLunch().map(item => <ItemCard key={item.id} item={item} />)
+    return this.getLunch().map(item => <ItemCard key={item.id} item={item} handleDelete={this.props.handleDelete} />)
   }
 
   renderDinner = () => {
-    return this.getDinner().map(item => <ItemCard key={item.id} item={item} />)
+    return this.getDinner().map(item => <ItemCard key={item.id} item={item} handleDelete={this.props.handleDelete} />)
   }
 
   render() {

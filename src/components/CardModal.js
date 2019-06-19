@@ -12,7 +12,7 @@ const CardModal = (props) => {
     })
   }
   return (
-  <Modal trigger={<Button basic color="red">More Info</Button>} key={props.item.id}>
+  <Modal trigger={<Button basic color="blue">More Info</Button>} key={props.item.id}>
     <Modal.Header>{props.item.name} ({props.item.section})</Modal.Header>
     <Modal.Content image>
       <Image wrapped size='medium' src={props.item.picture} />
@@ -23,7 +23,7 @@ const CardModal = (props) => {
         <h4>Allergens:</h4>
         <ul>{renderAllergenList()}</ul>
       </Modal.Description>
-      <DeleteEditButton item={props.item}/>
+      <DeleteEditButton item={props.item} handleDelete={props.handleDelete}/>
     </Modal.Content>
   </Modal>
   )

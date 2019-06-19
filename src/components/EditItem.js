@@ -1,7 +1,6 @@
 import React from 'react'
-import { Link } from "react-router-dom";
 import { withRouter } from 'react-router-dom';
-import { Button, Checkbox, Form } from 'semantic-ui-react'
+import { Button, Form } from 'semantic-ui-react'
 
 
 class EditItem extends React.Component {
@@ -23,7 +22,7 @@ class EditItem extends React.Component {
 
 
   handleChange = e => {
-    console.log(e.target.value)
+    console.log(this.item)
     let newFields = {...this.state.fields, [e.target.name]: e.target.value}
     this.setState({fields: newFields})
   }
@@ -43,14 +42,12 @@ class EditItem extends React.Component {
     .then(this.props.history.push("/"))
   }
 
-
-
   render() {
 
     return (
-      <div style ={ { backgroundImage: "url(https://www.azamaraclubcruises.com/sites/default/files/heros/med-food-hero.jpg)", minHeight: "100vh", backgroundSize: "cover" } }>
+      <div style ={ { backgroundImage: "url(https://www.sanziorestaurant.co.uk/wp-content/uploads/2014/07/photodune-6761938-food-background-on-dark-slate-m.jpg)", minHeight: "100vh", backgroundSize: "cover" } }>
         <div className="newItemDiv">
-        <h1>Create a New Item</h1>
+        <h1>{`Edit ${this.state.fields.name}`}</h1>
         <Form onSubmit={this.handleSubmit} className="newItemForm">
             <label>Name of Dish</label>
             <input

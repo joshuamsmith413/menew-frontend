@@ -75,16 +75,24 @@ class App extends React.Component {
       }
     })
     this.props.history.push(restaurant.name)
-    // return restaurant.items
-    //
-    // let thisRestaurant = this.state.restaurants.filter(restaurant => restaurant.id == e.target.id)
-    // console.log(thisRestaurant)
-    // this.setState({
-    //   restaurant: e.target.innerText
-    // }, () => {
-    //   const restaurantName = this.state.restaurant.split(' ').join('%20')
-    //   this.props.history.push(`${restaurantName}`)
-    // })
+  }
+
+  handleDelete = (id) => {
+    fetch(`http://localhost:3000/items/${id}`, {
+      method: "DELETE",
+        headers: {
+         'Content-Type': 'application/json'
+        }
+      }
+    )
+    fetch('http://localhost:3000/restaurants')
+    .then(r => r.json())
+    .then(data => {
+      this.setState({
+        restaurants: data
+      })
+    })
+    .then(() => this.props.history.push("/"))
   }
 
   // {this.state.restaurant === "" ? null : <AllergenCheckboxes itemsOnMenu={this.itemsOnMenu()} handleAllergenCheckboxes={this.handleAllergenCheckboxes}/>}
@@ -100,37 +108,21 @@ class App extends React.Component {
             <Route exact path="/" component={HomePage}/>
             <Route exact path='/EditItem/' component={EditItem}/>
             <Route path="/newitem" exact render={() =>
-                <NewItem
-                  menus ={this.state.menus}
-                  restaurants={this.state.restaurants}
-                  allergens={this.state.allergens}
-                />}/>
-              <Route path='/:name' render={(routerProps) => {
-
-              // when this route is hit
-              // if there is no selectedRestaurant in state
-              // dont't render this component
-              // instead call function
-              // this.fetchRestaurantByName(routerProps.match.params.name)
-              // this function will make a req to the server
-              // find the restuarant
-              // and then call this.setState({selectedRestaurant: restaurant})
-
-                // this.fetchRestaurantByName(routerProps.match.params.name)
-                // realllly you would render a loading spinner
-
-                if (!this.state.selectedRestaurant) {
+            <NewItem
+              menus ={this.state.menus}
+              restaurants={this.state.restaurants}
+              allergens={this.state.allergens}
+            />}/>
+            <Route path='/:name' render={(routerProps) => {
+              if (!this.state.selectedRestaurant) {
                 return null
-
-                }
-                return <ItemsContainer
-                  restaurant={this.state.selectedRestaurant} handleAllergenCheckboxes={this.handleAllergenCheckboxes}
-                  menus={this.state.menus}
-                  checkedAllergens={this.state.checkedAllergens}
-                  />
-
-
-            }}
+              }
+              return <ItemsContainer
+                restaurant={this.state.selectedRestaurant} handleAllergenCheckboxes={this.handleAllergenCheckboxes}
+                menus={this.state.menus}
+                checkedAllergens={this.state.checkedAllergens}
+                handleDelete={this.handleDelete}
+                />}}
                 />
           </Switch>
       </div>
