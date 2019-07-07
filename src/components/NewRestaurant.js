@@ -31,7 +31,7 @@ class NewRestaurant extends React.Component {
         <Modal.Header>Create Restaurant</Modal.Header>
         <Modal.Content image>
           <Form onSubmit={this.handleSubmit}>
-            <label>Name of Dish</label>
+            <label>Name of Restaurant</label>
             <input
               name='name'
               placeholder='Name'

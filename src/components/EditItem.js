@@ -16,15 +16,31 @@ class EditItem extends React.Component {
       section: this.item.section,
       picture: this.item.picture,
       restaurant: ""
+    },
+    lunch: {
+      menuId: null,
+      itemId: this.item.id
+    },
+    dinner: {
+      menuId: null,
+      itemId: this.item.id
     }
   }
 
 
 
   handleChange = e => {
-    console.log(this.item)
+    console.log(this.state)
     let newFields = {...this.state.fields, [e.target.name]: e.target.value}
-    this.setState({fields: newFields})
+    let newLunch = {[e.target.name]: e.target.value}
+    let newDinner = {[e.target.name]: e.target.value}
+    this.setState( prevState => {
+      return {
+        fields: newFields,
+        lunch: {menuId: newLunch.values()},
+        dinner: {menuId: newDinner}
+        }
+    })
   }
 
   handleSubmit = e => {
@@ -40,10 +56,22 @@ class EditItem extends React.Component {
     })
     .then(r => r.json())
     .then(this.props.history.push("/"))
+    if (this.state.lunch.menuId !== null) {
+    fetch(`http://localhost:3000/menu_items`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      },
+      body: JSON.stringify(this.state.lunch)
+    })
+    .then(r => r.json())
+    .then(data => console.log(data))
+    }
   }
 
   render() {
-
+    console.log(this.item)
     return (
       <div style ={ { backgroundImage: "url(https://www.sanziorestaurant.co.uk/wp-content/uploads/2014/07/photodune-6761938-food-background-on-dark-slate-m.jpg)", minHeight: "100vh", backgroundSize: "cover" } }>
         <div className="newItemDiv">
@@ -57,8 +85,8 @@ class EditItem extends React.Component {
               value={this.state.fields.name}
             />
             <label>Meal Peiod</label><br/>
-              <input type="radio" name="Meal Period" value="lunch"/> Lunch <span></span>
-              <input type="radio" name="Meal Period" value="dinner"/> Dinner <span></span><br/>
+              <input type="checkbox" onChange={this.handleChange} name="lunch" value={this.item.menus[0].id}/> Lunch <span></span>
+              <input type="checkbox" onChange={this.handleChange} name="dinner" value={this.item.menus[1].id}/> Dinner <span></span><br/>
             <label>One Liner or Drop Line</label>
             <input
               name='oneliner'

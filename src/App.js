@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom';
 import { Switch, Route, withRouter } from 'react-router-dom'
 import ItemsContainer from './components/ItemsContainer';
 import NavBar from './components/NavBar'
-import AllergenCheckboxes from './components/AllergenCheckboxes.js'
 import _ from 'lodash'
 import HomePage from './components/HomePage'
 import NewItem from './components/NewItem'
@@ -16,8 +15,6 @@ class App extends React.Component {
     items: [],
     menus: [],
     restaurants: [],
-    checkedAllergens: [],
-    allergenItems: [],
     selectedRestaurant: null
   }
 
@@ -43,21 +40,6 @@ class App extends React.Component {
       allergens: data
      })
    })
-  }
-
-  handleAllergenCheckboxes = (allergen) => {
-    let arrayOfAllergens = this.state.checkedAllergens
-    if (this.state.checkedAllergens.includes(allergen)) {
-      let indexToRemove = arrayOfAllergens.indexOf(allergen)
-      let newArrayForState = arrayOfAllergens.splice(indexToRemove, ++indexToRemove)
-      this.setState({
-        checkedAllergens: arrayOfAllergens
-      })
-    } else {
-      this.setState(prevState => {
-        return {checkedAllergens: [...prevState.checkedAllergens, allergen]}
-      })
-    }
   }
 
   fetchRestaurant = (routerProps) => {
@@ -111,16 +93,14 @@ class App extends React.Component {
             <NewItem
               menus ={this.state.menus}
               restaurants={this.state.restaurants}
-              allergens={this.state.allergens}
             />}/>
             <Route path='/:name' render={(routerProps) => {
               if (!this.state.selectedRestaurant) {
                 return null
               }
               return <ItemsContainer
-                restaurant={this.state.selectedRestaurant} handleAllergenCheckboxes={this.handleAllergenCheckboxes}
+                restaurant={this.state.selectedRestaurant}
                 menus={this.state.menus}
-                checkedAllergens={this.state.checkedAllergens}
                 handleDelete={this.handleDelete}
                 />}}
                 />

@@ -3,27 +3,11 @@ import { Card } from 'semantic-ui-react'
 import ItemCard from './ItemCard';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
-import AllergenCheckboxes from './AllergenCheckboxes'
+
 
 
 
 class ItemsContainer extends React.Component {
-
-  findItemsWithAllergen = () => {
-    let itemsWithAllergen = []
-    this.props.restaurant.items.forEach(item => {
-      let counter = 0
-      return item.allergens.forEach(allergen => {
-        if (this.props.checkedAllergens.includes(allergen)) {
-          return counter += 1
-        }
-      })
-      if (counter === this.props.checkedAllergens.length) {
-        itemsWithAllergen.push(item)
-      }
-    })
-    return itemsWithAllergen
-  }
 
   getLunch = () => {
     let lunch = []
@@ -69,7 +53,6 @@ class ItemsContainer extends React.Component {
       <div className="ItemsContainer">
         <div className="itemsToCenter">
         <h1>{this.props.restaurant.name}</h1>
-        <AllergenCheckboxes items={this.props.restaurant.items} handleAllergenCheckboxes={this.props.handleAllergenCheckboxes} allergens={this.props.allergens} />
         {this.renderLunch().length > 0 ? <h3>Lunch</h3> : null}
         <Card.Group itemsPerRow={4}>
           {this.renderLunch()}
