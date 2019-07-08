@@ -15,6 +15,7 @@ class App extends React.Component {
     items: [],
     menus: [],
     restaurants: [],
+    allergens: [],
     selectedRestaurant: null
   }
 
@@ -88,10 +89,14 @@ class App extends React.Component {
 
           <Switch>
             <Route exact path="/" component={HomePage}/>
-            <Route exact path='/EditItem/' component={EditItem}/>
+            <Route exact path='/EditItem/' exact render={() =>
+              <EditItem
+              restaurants={this.state.restaurants}
+              allergens={this.state.allergens}
+              />}/>
             <Route path="/newitem" exact render={() =>
-            <NewItem
-              menus ={this.state.menus}
+                <NewItem
+              allergens={this.state.allergens}
               restaurants={this.state.restaurants}
             />}/>
             <Route path='/:name' render={(routerProps) => {

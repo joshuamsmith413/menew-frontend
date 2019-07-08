@@ -13,13 +13,21 @@ class NewItem extends React.Component {
       description: "",
       section: "",
       picture: "",
-      restaurant: ""
-    }
+      restaurant: "",
+      lunch: "",
+      dinner: "",
+    },
+    allergens: []
   }
 
   handleChange = e => {
+    console.log(this.state)
     let newFields = {...this.state.fields, [e.target.name]: e.target.value}
-    this.setState({fields: newFields})
+    let newAllergen = null
+      if (e.target.name === "allergens") {
+        newAllergen = e.target.value
+      }
+    this.setState({fields: newFields, allergens: [...this.state.allergens, newAllergen]})
   }
 
   handleSubmit = e => {
@@ -31,14 +39,16 @@ class NewItem extends React.Component {
         'Content-Type': 'application/json',
         Accept: 'application/json'
       },
-      body: JSON.stringify(this.state.fields)
+      body: JSON.stringify(this.state)
     })
     .then(r => r.json())
     .then(() => this.props.history.push("/"))
   }
 
-  render() {
 
+
+  render() {
+    console.log(this.props.allergens)
     return (
       <div style ={ { backgroundImage: "url(https://www.azamaraclubcruises.com/sites/default/files/heros/med-food-hero.jpg)", minHeight: "100vh", backgroundSize: "cover" } }>
         <div className="newItemDiv">
@@ -52,14 +62,14 @@ class NewItem extends React.Component {
               value={this.state.fields.name}
             />
             <label>Select a Restaurant</label>
-            <select onChange={this.handleChange}>
+            <select name="restaurant" onChange={this.handleChange}>
               {this.props.restaurants.map(restaurant => {
-                return <option name={restaurant.name} value={restaurant.id}>{restaurant.name}</option>
+                return <option value={restaurant.name}>{restaurant.name}</option>
               })}
             </select>
             <label>Meal Peiod</label><br/>
-              <input type="radio" name="Meal Period" value="lunch"/> Lunch <span></span>
-              <input type="radio" name="Meal Period" value="dinner"/> Dinner <span></span><br/>
+            <input type="checkbox" onChange={this.handleChange} name="lunch" value="lunch"/> Lunch <span></span>
+            <input type="checkbox" onChange={this.handleChange} name="dinner" value="dinner"/> Dinner <span></span><br/>
             <label>One Liner or Drop Line</label>
             <input
               name='oneliner'
@@ -74,6 +84,10 @@ class NewItem extends React.Component {
               onChange={this.handleChange}
               value={this.state.fields.description}
               />
+            <label>Allergens</label><br/>
+            <span>
+              {this.props.allergens.map(allergen => <span><input type="checkbox" onChange={this.handleChange} name="allergens" value={allergen.name}/>{allergen.name}</span>)}
+            </span>
             <label>Section</label>
             <input
               name='section'
