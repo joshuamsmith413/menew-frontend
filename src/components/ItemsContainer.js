@@ -46,25 +46,23 @@ class ItemsContainer extends React.Component {
   }
 
   render() {
-
-
-  return (
-    <div style ={ { backgroundImage: "url(https://i.pinimg.com/originals/76/89/c5/7689c5513084cd3ae199cec4f9b84af3.jpg)", minHeight: "100vh", backgroundSize: "cover" } }>
-      <div className="ItemsContainer">
-        <div className="itemsToCenter">
-        <h1>{this.props.restaurant.name}</h1>
-        {this.renderLunch().length > 0 ? <h3>Lunch</h3> : null}
-        <Card.Group itemsPerRow={4}>
-          {this.renderLunch()}
-        </Card.Group>
-          <h3>Dinner</h3>
-        <Card.Group itemsPerRow={4}>
-          {this.renderDinner()}
-        </Card.Group>
+    return (
+      <div style ={ { backgroundImage: "url(https://i.pinimg.com/originals/76/89/c5/7689c5513084cd3ae199cec4f9b84af3.jpg)", minHeight: "100vh", backgroundSize: "cover" } }>
+        <div className="ItemsContainer">
+          <div className="itemsToCenter">
+          <h1>{this.props.restaurant.name}</h1>
+          {this.renderLunch().length > 0 ? <h3>Lunch</h3> : null}
+          <Card.Group itemsPerRow={4}>
+            {this.renderLunch()}
+          </Card.Group>
+            <h3>Dinner</h3>
+          <Card.Group itemsPerRow={4}>
+            {this.renderDinner()}
+          </Card.Group>
+        </div>
+        </div>
       </div>
-      </div>
-    </div>
-    )
+      )
   }
 }
 

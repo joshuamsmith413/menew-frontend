@@ -45,7 +45,7 @@ class EditItem extends React.Component {
       body: JSON.stringify(this.state.fields)
     })
     .then(r => r.json())
-    .then(this.props.history.push("/"))
+    .then(this.props.history.push(`/${this.item.restaurants[0].name}`))
   }
 
   render() {

@@ -6,10 +6,6 @@ import MenuItem from "@material-ui/core/MenuItem";
 export default function RestaurantDropdown(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const onlyUnique = (value, index, self) => {
-    return self.indexOf(value) === index;
-  }
-
   function handleClick(event) {
     setAnchorEl(event.currentTarget);
   }

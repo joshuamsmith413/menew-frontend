@@ -19,6 +19,8 @@ class App extends React.Component {
     selectedRestaurant: null
   }
 
+
+
   componentDidMount() {
    fetch('http://localhost:3000/items')
    .then(r => r.json())
@@ -43,11 +45,18 @@ class App extends React.Component {
    })
   }
 
-  fetchRestaurant = (routerProps) => {
-    let saveRestaurant = this.state.restaurants.filter(restaurant => restaurant.name === routerProps.match.params.name)
-    this.setState({
-      selectedRestaurant: saveRestaurant
-    })
+  restaurantRefresh = () => {
+    const restId = this.props.location.search.split('')[1]
+    const restString = this.props.location.pathname.split('').slice(1).join('')
+    if (this.state.selectedRestaurant === null && this.props.location.pathname !== "/") {
+      fetch(`http://localhost:3000/restaurants/${restId}`)
+      .then(r => r.json())
+      .then(data => {
+        this.setState({
+          selectedRestaurant: data
+        })
+      })
+    }
   }
 
   selectRestaurant = (restaurant) => {
@@ -57,7 +66,7 @@ class App extends React.Component {
         menus: restaurant.menus
       }
     })
-    this.props.history.push(restaurant.name)
+    this.props.history.push({pathname: `/${restaurant.name}`, search: `${restaurant.id}`})
   }
 
   handleDelete = (id) => {
@@ -78,7 +87,7 @@ class App extends React.Component {
     .then(() => this.props.history.push("/"))
   }
 
-  // {this.state.restaurant === "" ? null : <AllergenCheckboxes itemsOnMenu={this.itemsOnMenu()} handleAllergenCheckboxes={this.handleAllergenCheckboxes}/>}
+
   render() {
     return (
       <div className="App">
@@ -101,7 +110,7 @@ class App extends React.Component {
             />}/>
             <Route path='/:name' render={(routerProps) => {
               if (!this.state.selectedRestaurant) {
-                return null
+                return null, this.restaurantRefresh()
               }
               return <ItemsContainer
                 restaurant={this.state.selectedRestaurant}
