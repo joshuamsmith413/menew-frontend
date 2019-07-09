@@ -21,7 +21,6 @@ class NewItem extends React.Component {
   }
 
   handleChange = e => {
-    console.log(this.state)
     let newFields = {...this.state.fields, [e.target.name]: e.target.value}
     let newAllergen = null
       if (e.target.name === "allergens") {
@@ -48,7 +47,7 @@ class NewItem extends React.Component {
 
 
   render() {
-    console.log(this.props.allergens)
+
     return (
       <div style ={ { backgroundImage: "url(https://www.azamaraclubcruises.com/sites/default/files/heros/med-food-hero.jpg)", minHeight: "100vh", backgroundSize: "cover" } }>
         <div className="newItemDiv">
@@ -62,39 +61,44 @@ class NewItem extends React.Component {
               value={this.state.fields.name}
             />
             <label>Select a Restaurant</label>
-            <select name="restaurant" onChange={this.handleChange}>
+              <select name="restaurant" onChange={this.handleChange}>
               {this.props.restaurants.map(restaurant => {
                 return <option value={restaurant.name}>{restaurant.name}</option>
               })}
-            </select>
+              </select>
             <label>Meal Peiod</label><br/>
-            <input type="checkbox" onChange={this.handleChange} name="lunch" value="lunch"/> Lunch <span></span>
-            <input type="checkbox" onChange={this.handleChange} name="dinner" value="dinner"/> Dinner <span></span><br/>
+              <input type="checkbox" onChange={this.handleChange} name="lunch" value="lunch"/> Lunch <span></span>
+              <input type="checkbox" onChange={this.handleChange} name="dinner" value="dinner"/> Dinner <span></span><br/>
             <label>One Liner or Drop Line</label>
-            <input
-              name='oneliner'
-              placeholder='Drop line'
-              onChange={this.handleChange}
-              value={this.state.fields.oneliner}
-            />
-          <label>Description</label>
-            <Form.TextArea
-              name='description'
-              placeholder='Full Description Here'
-              onChange={this.handleChange}
-              value={this.state.fields.description}
+              <input
+                name='oneliner'
+                placeholder='Drop line'
+                onChange={this.handleChange}
+                value={this.state.fields.oneliner}
               />
-            <label>Allergens</label><br/>
-            <span>
-              {this.props.allergens.map(allergen => <span><input type="checkbox" onChange={this.handleChange} name="allergens" value={allergen.name}/>{allergen.name}</span>)}
-            </span>
-            <label>Section</label>
-            <input
-              name='section'
-              placeholder='App, Main, Crudi, etc...'
-              onChange={this.handleChange}
-              value={this.state.fields.section}
-            />
+            <label>Description</label>
+              <Form.TextArea
+                name='description'
+                placeholder='Full Description Here'
+                onChange={this.handleChange}
+                value={this.state.fields.description}
+                />
+                <label>Allergens</label><br/>
+                <span>
+                  {this.props.allergens.map(allergen => <span><input type="checkbox" onChange={this.handleChange} name="allergens" value={allergen.name}/>{allergen.name}</span>)}
+                </span><br/>
+                <label>Section</label>
+                <input
+                  name='section'
+                  placeholder='App, Main, Crudi, etc...'
+                  onChange={this.handleChange}
+                  value={this.state.fields.section}
+                />
+
+
+
+
+
             <label>Picture</label>
             <input
               name='picture'

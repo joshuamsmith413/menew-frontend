@@ -18,7 +18,8 @@ class EditItem extends React.Component {
       restaurant: this.item.restaurants[0].name,
       lunch: "",
       dinner: ""
-    }
+    },
+    allergens: []
   }
 
 
@@ -26,9 +27,13 @@ class EditItem extends React.Component {
   handleChange = e => {
     console.log(this.state)
     let newFields = {...this.state.fields, [e.target.name]: e.target.value}
+    let newAllergen = null
+      if (e.target.name === "allergens") {
+        newAllergen = e.target.value
+      }
     this.setState( prevState => {
       return {
-        fields: newFields,
+        fields: newFields, allergens: [...this.state.allergens, newAllergen]
         }
     })
   }
@@ -42,26 +47,38 @@ class EditItem extends React.Component {
         'Content-Type': 'application/json',
         Accept: 'application/json'
       },
-      body: JSON.stringify(this.state.fields)
+      body: JSON.stringify(this.state)
     })
     .then(r => r.json())
     .then(this.props.history.push(`/${this.item.restaurants[0].name}`))
   }
 
+
   render() {
+
     return (
       <div style ={ { backgroundImage: "url(https://www.sanziorestaurant.co.uk/wp-content/uploads/2014/07/photodune-6761938-food-background-on-dark-slate-m.jpg)", minHeight: "100vh", backgroundSize: "cover" } }>
         <div className="newItemDiv">
         <h1>{`Edit ${this.state.fields.name}`}</h1>
         <Form onSubmit={this.handleSubmit} className="newItemForm">
-            <label>Name of Dish</label>
+          <label>Name of Dish</label>
             <input
               name='name'
               placeholder='Name'
               onChange={this.handleChange}
               value={this.state.fields.name}
             />
-            <label>One Liner or Drop Line</label>
+          <label>Restaurant</label>
+            <input
+              name='restaurant'
+              placeholder='restaurant name'
+              onChange={this.handleChange}
+              value={this.state.fields.restaurant}
+            />
+          <label>Meal Peiod</label><br/>
+            <input type="checkbox" onChange={this.handleChange} name="lunch" value="lunch"/> Lunch <span></span>
+            <input type="checkbox" onChange={this.handleChange} name="dinner" value="dinner"/> Dinner <span></span><br/>
+          <label>One Liner or Drop Line</label>
             <input
               name='oneliner'
               placeholder='Drop line'
@@ -75,17 +92,11 @@ class EditItem extends React.Component {
               onChange={this.handleChange}
               value={this.state.fields.description}
               />
-              <label>Restaurant</label>
-                <input
-                  name='restaurant'
-                  placeholder='restaurant name'
-                  onChange={this.handleChange}
-                  value={this.state.fields.restaurant}
-                />
-            <label>Meal Peiod</label><br/>
-            <input type="checkbox" onChange={this.handleChange} name="lunch" value="lunch"/> Lunch <span></span>
-            <input type="checkbox" onChange={this.handleChange} name="dinner" value="dinner"/> Dinner <span></span><br/>
-            <label>Section</label>
+          <label>Allergens</label><br/>
+            <span>
+              {this.props.allergens.map(allergen => <span><input type="checkbox" onChange={this.handleChange} name="allergens" value={allergen.name}/> {allergen.name} </span>)}
+            </span><br/>
+          <label>Section</label>
             <input
               name='section'
               placeholder='App, Main, Crudi, etc...'
