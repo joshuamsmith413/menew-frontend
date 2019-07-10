@@ -4,6 +4,8 @@ Menew is an app designed to help restaurant employees stay up to date with the c
 
 The idea is that a restaurant would enter in all of the information on each item and then the employee would be able to study in a better way than reading word documents.
 
+Currently working on implementing user features.
+
 From the backend file above run bundle followed by rails s to get the localhost:3001 server up
 
 From this file run npm install followed by npm start and then yes to view client
