@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Header, Image, Modal, Form } from 'semantic-ui-react'
+import { Button, Modal, Form } from 'semantic-ui-react'
 
 class NewRestaurant extends React.Component {
   state = {

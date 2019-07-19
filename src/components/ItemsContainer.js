@@ -1,7 +1,6 @@
 import React from 'react'
 import { Card } from 'semantic-ui-react'
 import ItemCard from './ItemCard';
-import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 
 

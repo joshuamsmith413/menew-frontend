@@ -1,14 +1,11 @@
 import React from 'react';
 import './App.css';
-import ReactDOM from 'react-dom';
 import { Switch, Route, withRouter } from 'react-router-dom'
 import ItemsContainer from './components/ItemsContainer';
 import NavBar from './components/NavBar'
-import _ from 'lodash'
 import HomePage from './components/HomePage'
 import NewItem from './components/NewItem'
 import EditItem from './components/EditItem'
-import { BrowserRouter } from 'react-router-dom';
 
 class App extends React.Component {
   state = {
@@ -47,7 +44,6 @@ class App extends React.Component {
 
   restaurantRefresh = () => {
     const restId = this.props.location.search.split('')[1]
-    const restString = this.props.location.pathname.split('').slice(1).join('')
     if (this.state.selectedRestaurant === null && this.props.location.pathname !== "/") {
       fetch(`http://localhost:3000/restaurants/${restId}`)
       .then(r => r.json())
@@ -110,7 +106,7 @@ class App extends React.Component {
             />}/>
             <Route path='/:name' render={(routerProps) => {
               if (!this.state.selectedRestaurant) {
-                return null, this.restaurantRefresh()
+                return this.restaurantRefresh()
               }
               return <ItemsContainer
                 restaurant={this.state.selectedRestaurant}
