@@ -19,21 +19,21 @@ class App extends React.Component {
 
 
   componentDidMount() {
-   fetch('http://localhost:3000/items')
+   fetch(`${process.env.API}items`)
    .then(r => r.json())
    .then(data => {
      this.setState({
        items: data
      })
    })
-   fetch('http://localhost:3000/restaurants')
+   fetch(`${process.env.API}restaurants`)
    .then(r => r.json())
    .then(data => {
      this.setState({
        restaurants: data
      })
    })
-   fetch('http://localhost:3000/allergens')
+   fetch(`${process.env.API}allergens`)
    .then(r => r.json())
    .then(data => {
      this.setState({
@@ -45,7 +45,7 @@ class App extends React.Component {
   restaurantRefresh = () => {
     const restId = this.props.location.search.split('')[1]
     if (this.state.selectedRestaurant === null && this.props.location.pathname !== "/") {
-      fetch(`http://localhost:3000/restaurants/${restId}`)
+      fetch(`${process.env.API}restaurants/${restId}`)
       .then(r => r.json())
       .then(data => {
         this.setState({
@@ -66,14 +66,14 @@ class App extends React.Component {
   }
 
   handleDelete = (id) => {
-    fetch(`http://localhost:3000/items/${id}`, {
+    fetch(`${process.env.API}items/${id}`, {
       method: "DELETE",
         headers: {
          'Content-Type': 'application/json'
         }
       }
     )
-    fetch('http://localhost:3000/restaurants')
+    fetch(`${process.env.API}restaurants`)
     .then(r => r.json())
     .then(data => {
       this.setState({

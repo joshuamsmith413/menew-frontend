@@ -32,7 +32,7 @@ class NewItem extends React.Component {
   handleSubmit = e => {
     e.preventDefault()
     e.target.reset()
-    fetch('http://localhost:3000/items', {
+    fetch(`${process.env.API}items`, {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',

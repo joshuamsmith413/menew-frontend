@@ -14,7 +14,7 @@ class NewRestaurant extends React.Component {
     handleSubmit = e => {
       e.preventDefault()
       e.target.reset()
-      fetch('http://localhost:3000/restaurants', {
+      fetch(`${process.env.API}restaurants`, {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
