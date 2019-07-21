@@ -41,7 +41,7 @@ class EditItem extends React.Component {
   handleSubmit = e => {
     e.preventDefault()
     e.target.reset()
-    fetch(`${process.env.API}items/${this.props.location.state.item.id}`, {
+    fetch(`https://menew-api.herokuapp.com/items/${this.props.location.state.item.id}`, {
       method: "PATCH",
       headers: {
         'Content-Type': 'application/json',

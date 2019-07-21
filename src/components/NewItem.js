@@ -32,7 +32,7 @@ class NewItem extends React.Component {
   handleSubmit = e => {
     e.preventDefault()
     e.target.reset()
-    fetch(`${process.env.API}items`, {
+    fetch(`https://menew-api.herokuapp.com/items`, {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',

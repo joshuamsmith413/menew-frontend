@@ -14,7 +14,7 @@ class NewRestaurant extends React.Component {
     handleSubmit = e => {
       e.preventDefault()
       e.target.reset()
-      fetch(`${process.env.API}restaurants`, {
+      fetch(`https://menew-api.herokuapp.com/restaurants`, {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',

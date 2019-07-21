@@ -5,7 +5,6 @@ import ItemsContainer from './components/ItemsContainer';
 import NavBar from './components/NavBar'
 import HomePage from './components/HomePage'
 import NewItem from './components/NewItem'
-import EditItem from './components/EditItem'
 
 class App extends React.Component {
   state = {
@@ -19,21 +18,21 @@ class App extends React.Component {
 
 
   componentDidMount() {
-   fetch(`${process.env.API}items`)
+   fetch(`https://menew-api.herokuapp.com/items`)
    .then(r => r.json())
    .then(data => {
      this.setState({
        items: data
      })
    })
-   fetch(`${process.env.API}restaurants`)
+   fetch(`https://menew-api.herokuapp.com/restaurants`)
    .then(r => r.json())
    .then(data => {
      this.setState({
        restaurants: data
      })
    })
-   fetch(`${process.env.API}allergens`)
+   fetch(`https://menew-api.herokuapp.com/allergens`)
    .then(r => r.json())
    .then(data => {
      this.setState({
@@ -45,7 +44,7 @@ class App extends React.Component {
   restaurantRefresh = () => {
     const restId = this.props.location.search.split('')[1]
     if (this.state.selectedRestaurant === null && this.props.location.pathname !== "/") {
-      fetch(`${process.env.API}restaurants/${restId}`)
+      fetch(`https://menew-api.herokuapp.com/restaurants/${restId}`)
       .then(r => r.json())
       .then(data => {
         this.setState({
@@ -66,14 +65,14 @@ class App extends React.Component {
   }
 
   handleDelete = (id) => {
-    fetch(`${process.env.API}items/${id}`, {
+    fetch(`https://menew-api.herokuapp.com/items/${id}`, {
       method: "DELETE",
         headers: {
          'Content-Type': 'application/json'
         }
       }
     )
-    fetch(`${process.env.API}restaurants`)
+    fetch(`https://menew-api.herokuapp.com/restaurants`)
     .then(r => r.json())
     .then(data => {
       this.setState({
@@ -85,20 +84,17 @@ class App extends React.Component {
 
 
   render() {
+
     return (
       <div className="App">
         <NavBar
           items={this.state.items}
           selectRestaurant={this.selectRestaurant}
-          restaurants={this.state.restaurants}/>
+          restaurants={this.state.restaurants}
+          allergens={this.state.allergens}/>
 
           <Switch>
             <Route exact path="/" component={HomePage}/>
-            <Route exact path='/EditItem/' exact render={() =>
-              <EditItem
-              restaurants={this.state.restaurants}
-              allergens={this.state.allergens}
-              />}/>
             <Route path="/newitem" exact render={() =>
                 <NewItem
               allergens={this.state.allergens}
