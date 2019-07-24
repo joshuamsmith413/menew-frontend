@@ -84,7 +84,6 @@ class App extends React.Component {
 
 
   render() {
-
     return (
       <div className="App">
         <NavBar
@@ -95,6 +94,11 @@ class App extends React.Component {
 
           <Switch>
             <Route exact path="/" component={HomePage}/>
+            <Route exact path='/EditItem/' exact render={() =>
+              <EditItem
+              restaurants={this.state.restaurants}
+              allergens={this.state.allergens}
+              />}/>
             <Route path="/newitem" exact render={() =>
                 <NewItem
               allergens={this.state.allergens}
