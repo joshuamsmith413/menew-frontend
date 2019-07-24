@@ -5,6 +5,7 @@ import ItemsContainer from './components/ItemsContainer';
 import NavBar from './components/NavBar'
 import HomePage from './components/HomePage'
 import NewItem from './components/NewItem'
+import EditItem from './components/EditItem'
 
 class App extends React.Component {
   state = {
