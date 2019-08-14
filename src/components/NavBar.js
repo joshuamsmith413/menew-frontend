@@ -1,5 +1,4 @@
 import React from 'react'
-import RestaurantDropdown from './RestaurantDropdown'
 import NewRestaurant from './NewRestaurant'
 import { Link } from "react-router-dom";
 
