@@ -44,6 +44,10 @@ class NewItem extends React.Component {
     .then(() => this.props.history.push("/"))
   }
 
+  renderAllergenCheckboxes = () => {
+    return this.props.allergens.map(allergen => <span> <input type="checkbox" onChange={this.handleChange} name="allergens" value={allergen.name}/> {allergen.name} </span>)
+  }
+
 
 
   render() {
@@ -53,64 +57,59 @@ class NewItem extends React.Component {
         <div className="newItemDiv">
         <h1>Create a New Item</h1>
         <Form onSubmit={this.handleSubmit} className="newItemForm">
-            <label>Name of Dish</label>
-            <input
-              name='name'
-              placeholder='Name'
-              onChange={this.handleChange}
-              value={this.state.fields.name}
-            />
-            <label>Select a Restaurant</label>
-              <select name="restaurant" onChange={this.handleChange}>
+          <label>Name of Dish</label>
+          <input
+            name='name'
+            placeholder='Name'
+            onChange={this.handleChange}
+            value={this.state.fields.name}
+          />
+          <label>Select a Restaurant</label>
+            <select name="restaurant" onChange={this.handleChange}>
               {this.props.restaurants.map(restaurant => {
                 return <option value={restaurant.name}>{restaurant.name}</option>
               })}
-              </select>
-            <label>Meal Peiod</label><br/>
-              <input type="checkbox" onChange={this.handleChange} name="lunch" value="lunch"/> Lunch <span></span>
-              <input type="checkbox" onChange={this.handleChange} name="dinner" value="dinner"/> Dinner <span></span><br/>
-            <label>One Liner or Drop Line</label>
-              <input
-                name='oneliner'
-                placeholder='Drop line'
-                onChange={this.handleChange}
-                value={this.state.fields.oneliner}
-              />
-            <label>Description</label>
-              <Form.TextArea
-                name='description'
-                placeholder='Full Description Here'
-                onChange={this.handleChange}
-                value={this.state.fields.description}
-                />
-                <label>Allergens</label><br/>
-                <span>
-                  {this.props.allergens.map(allergen => <span><input type="checkbox" onChange={this.handleChange} name="allergens" value={allergen.name}/>{allergen.name}</span>)}
-                </span><br/>
-                <label>Section</label>
-                <input
-                  name='section'
-                  placeholder='App, Main, Crudi, etc...'
-                  onChange={this.handleChange}
-                  value={this.state.fields.section}
-                />
-
-
-
-
-
-            <label>Picture</label>
+            </select>
+          <label>Meal Peiod</label><br/>
+            <input type="checkbox" onChange={this.handleChange} name="lunch" value="lunch"/> Lunch <span></span>
+            <input type="checkbox" onChange={this.handleChange} name="dinner" value="dinner"/> Dinner <span></span><br/>
+          <label>One Liner or Drop Line</label>
+            <input
+              name='oneliner'
+              placeholder='Drop line'
+              onChange={this.handleChange}
+              value={this.state.fields.oneliner}
+            />
+          <label>Description</label>
+            <Form.TextArea
+              name='description'
+              placeholder='Full Description Here'
+              onChange={this.handleChange}
+              value={this.state.fields.description}
+            />
+          <label>Allergens</label><br/>
+            <span>
+              {this.renderAllergenCheckboxes()}
+            </span><br/>
+          <label>Section</label>
+            <input
+              name='section'
+              placeholder='App, Main, Crudi, etc...'
+              onChange={this.handleChange}
+              value={this.state.fields.section}
+            />
+          <label>Picture</label>
             <input
               name='picture'
               placeholder='Enter Url'
               onChange={this.handleChange}
               value={this.state.fields.picture}
-            />
-          <br/>
+            /><br/>
           <Button type='Submit'>Submit</Button>
         </Form>
         </div>
       </div>
-    )}
+    )
+  }
 }
 export default withRouter(NewItem)

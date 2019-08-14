@@ -16,7 +16,6 @@ class NavBar extends React.Component {
         <div className="navbar">
           <Link to="/"><h1 className="nav-title">Menew</h1></Link>
           <span>
-            <Link to="/newitem"> New Item </Link>
             <NewRestaurant />
         </span>
         </div>

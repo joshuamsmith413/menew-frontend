@@ -2,6 +2,7 @@ import React from 'react'
 import { Card } from 'semantic-ui-react'
 import ItemCard from './ItemCard';
 import { withRouter } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 
 
@@ -58,6 +59,7 @@ class ItemsContainer extends React.Component {
           <Card.Group itemsPerRow={4}>
             {this.renderDinner()}
           </Card.Group>
+          <Link to="/newitem"> New Item </Link>
         </div>
         </div>
       </div>
