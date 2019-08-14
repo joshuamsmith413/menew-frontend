@@ -19,21 +19,21 @@ class App extends React.Component {
 
 
   componentDidMount() {
-   fetch(`https://menew-api.herokuapp.com/items`)
+   fetch(`http://localhost:3000/items`)
    .then(r => r.json())
    .then(data => {
      this.setState({
        items: data
      })
    })
-   fetch(`https://menew-api.herokuapp.com/restaurants`)
+   fetch(`http://localhost:3000/restaurants`)
    .then(r => r.json())
    .then(data => {
      this.setState({
        restaurants: data
      })
    })
-   fetch(`https://menew-api.herokuapp.com/allergens`)
+   fetch(`http://localhost:3000/allergens`)
    .then(r => r.json())
    .then(data => {
      this.setState({
@@ -45,7 +45,7 @@ class App extends React.Component {
   restaurantRefresh = () => {
     const restId = this.props.location.search.split('')[1]
     if (this.state.selectedRestaurant === null && this.props.location.pathname !== "/") {
-      fetch(`https://menew-api.herokuapp.com/restaurants/${restId}`)
+      fetch(`http://localhost:3000/restaurants/${restId}`)
       .then(r => r.json())
       .then(data => {
         this.setState({
@@ -66,14 +66,14 @@ class App extends React.Component {
   }
 
   handleDelete = (id) => {
-    fetch(`https://menew-api.herokuapp.com/items/${id}`, {
+    fetch(`http://localhost:3000/items/${id}`, {
       method: "DELETE",
         headers: {
          'Content-Type': 'application/json'
         }
       }
     )
-    fetch(`https://menew-api.herokuapp.com/restaurants`)
+    fetch(`http://localhost:3000/restaurants`)
     .then(r => r.json())
     .then(data => {
       this.setState({
@@ -94,17 +94,23 @@ class App extends React.Component {
           allergens={this.state.allergens}/>
 
           <Switch>
-            <Route exact path="/" component={HomePage}/>
+            <Route exact path="/" render={() =>{
+                return <HomePage
+                  restaurants={this.state.restaurants}
+                  selectRestaurant={this.selectRestaurant}/>
+              }}/>
             <Route exact path='/EditItem/' exact render={() =>
               <EditItem
-              restaurants={this.state.restaurants}
-              allergens={this.state.allergens}
-              />}/>
+                restaurants={this.state.restaurants}
+                allergens={this.state.allergens}
+              />
+            }/>
             <Route path="/newitem" exact render={() =>
                 <NewItem
-              allergens={this.state.allergens}
-              restaurants={this.state.restaurants}
-            />}/>
+                  allergens={this.state.allergens}
+                  restaurants={this.state.restaurants}
+                />
+            }/>
             <Route path='/:name' render={(routerProps) => {
               if (!this.state.selectedRestaurant) {
                 return this.restaurantRefresh()

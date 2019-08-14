@@ -1,11 +1,17 @@
 .App {
   /* text-align: center; */
+
+}
+
+body {
+  background: #EFE9E7 !important;
 }
 
 /* -----------NAVBAR-------------- */
 
 .navbar {
-  background-color: "#F79F1B";
+  background: #E6E8E6;
+  border-bottom: solid;
 }
 
 .nav-title {
@@ -28,48 +34,52 @@
 
 /* --------home page--------------- */
 
-#homeTitle {
-  text-align: right;
-  color: white;
-  padding-right: 40px;
+#HomePage {
+  /* background-color: #EAF2E3; */
 }
 
-.secondaryContainer {
+#restaurantContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
+#homeTitle {
+  text-align: center;
+  padding-top: 1%;
+
+}
+
+/* .secondaryContainer {
   display: block;
   text-align: center;
   width: 50%;
-}
+} */
 
-#HomePagecontainer1 {
-  display: inline-block;
-  width: auto;
+.restaurantTile {
+  position: relative;
+  grid-row: auto;
   text-align: center;
-  padding-left: 50px;
-  padding-right: 50px;
+  color: white;
 }
 
-#HomePagecontainer2 {
-  display: inline-block;
-  text-align: center;
-  width: auto;
-  padding-left: 50px;
-  padding-right: 50px;
-}
-
-.HomePageText {
+.restaurantTile, img {
+  border-radius: 10%;
   width: 100%;
 }
 
-#cardExample {
-  height: auto;
-  width: auto;
-  border-radius: 8px;
+.restaurantText:hover {
+  color: black;
 }
 
-#menuPageExample {
-  height: auto;
-  width: auto;
-  border-radius: 8px;
+.restaurantText {
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
 }
 
 /*------------ new item form -------------*/

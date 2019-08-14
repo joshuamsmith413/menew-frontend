@@ -8,7 +8,7 @@ class ItemCard extends React.Component {
   render() {
     return(
       <Card key={this.props.item.id}>
-        <Image src={this.props.item.picture} width="100px" height="100px" gravity="faces" crop="fill" wrapped ui={false} />
+        <Image src={this.props.item.picture}  gravity="faces" crop="fill" wrapped ui={false} />
         <Card.Content>
           <Card.Header>{this.props.item.name}</Card.Header>
           <Card.Meta>
